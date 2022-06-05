@@ -5,7 +5,7 @@ import { useSelector, useDispatch, createDispatchHook } from "react-redux";
 const Card = () => {
   const board = useSelector((state) => state.board);
   const { _id } = useParams();
-  console.log(_id);
+  // console.log(_id);
   //   console.log(board.list[_id].comment);
   return (
     <ul key={Number(_id)}>

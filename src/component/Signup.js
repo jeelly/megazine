@@ -23,7 +23,7 @@ const Signup = () => {
 
     const uploded_file = await uploadBytes(
       //경로
-      ref(storage, `images/${e.target.files[0].name}`),
+      ref(storage, `userimages/${e.target.files[0].name}`),
       // 어떤파일 올릴지
       e.target.files[0]
     );

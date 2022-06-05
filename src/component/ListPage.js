@@ -8,6 +8,7 @@ import { useState } from "react";
 
 //Subpage
 import Card from "./Card";
+
 function List(props) {
   const board_list = props.board.list.map((l, idx) => {
     return (
@@ -15,7 +16,8 @@ function List(props) {
         <li key={idx}>
           <div>
             <p>{l.name}</p>
-            <p>({l.contents})</p>
+            <p>{l.content}</p>
+            <p>{l.today}</p>
             <img src={l.image} />
           </div>
           <div>
@@ -27,7 +29,12 @@ function List(props) {
       </Link>
     );
   });
-  return <ul>{board_list}</ul>;
+
+  return (
+    <>
+      <ul>{board_list}</ul>
+    </>
+  );
 }
 
 const Comment = (props) => {
