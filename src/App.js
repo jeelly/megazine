@@ -17,6 +17,7 @@ import Write from "./component/Write";
 import Test from "./component/Test";
 import Home from "./component/Home";
 import Card from "./component/Card";
+import Header from "./component/Header";
 
 function App() {
   const [is_login, setIsLogin] = React.useState(false);
@@ -35,25 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      {is_login ? (
-        <header>
-          <Link to="/">홈버튼</Link>
-          <strong>유저이름</strong>
-          <Link to="#">알림</Link>
-          <button
-            onClick={() => {
-              signOut(auth);
-            }}
-          >
-            로그아웃
-          </button>
-        </header>
-      ) : (
-        <header>
-          <Link to="signup">회원가입</Link>
-          <Link to="/">로그인</Link>
-        </header>
-      )}
+      <Header is_login={is_login} />
       <Routes>
         <Route path="/signup" element={<Signup />} />
         {is_login ? (
