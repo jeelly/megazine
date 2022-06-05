@@ -9,27 +9,14 @@ import { useState } from "react";
 import { auth, db } from "./shared/firebase";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 //Router
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 //Sub page
-import Signup from "./Signup";
-import Login from "./Login";
+import Signup from "./component/Signup";
+import Login from "./component/Login";
+import Write from "./component/Write";
 import Test from "./component/Test";
-
-const Home = () => {
-  return (
-    <>
-      <h1>환영합니다!</h1>
-      <button
-        onClick={() => {
-          //Firebase 로그아웃
-          signOut(auth);
-        }}
-      >
-        로그아웃
-      </button>
-    </>
-  );
-};
+import Home from "./component/Home";
+import Card from "./component/Card";
 
 function App() {
   const [is_login, setIsLogin] = React.useState(false);
@@ -48,12 +35,33 @@ function App() {
 
   return (
     <div className="App">
+      {is_login ? (
+        <header>
+          <Link to="/">홈버튼</Link>
+          <strong>유저이름</strong>
+          <Link to="#">알림</Link>
+          <button
+            onClick={() => {
+              signOut(auth);
+            }}
+          >
+            로그아웃
+          </button>
+        </header>
+      ) : (
+        <header>
+          <Link to="signup">회원가입</Link>
+          <Link to="/">로그인</Link>
+        </header>
+      )}
       <Routes>
         <Route path="/signup" element={<Signup />} />
         {is_login ? (
           <>
             <Route path="/" element={<Home />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/write" element={<Write />} />
+            <Route path="/card/:_id" element={<Card />} />
           </>
         ) : (
           <Route path="/" element={<Login />} />

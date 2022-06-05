@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth, db } from "./shared/firebase";
+import { auth, db } from "../shared/firebase";
 import { useParams, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getDocs, where, query, collection } from "firebase/firestore";
@@ -37,9 +37,8 @@ const Login = () => {
       아이디(이메일):
       <input ref={id_ref} /> <br />
       비밀번호:
-      <input ref={pw_ref} /> <br />
+      <input ref={pw_ref} type="password" /> <br />
       <button onClick={loginFB}>로그인</button>
-      <Link to="signup">회원가입</Link>
     </div>
   );
 };
