@@ -48,23 +48,30 @@ const boardSlice = createSlice({
     //   state.name = action.payload;
     // },
     loadBoard: (state, action) => {
-      console.log("loadBoard", action.payload);
+      // console.log("loadBoard", action.payload);
       state.list.push(...action.payload);
     },
     addBoard(state, action) {
-      console.log("addBoard", action.payload);
+      // console.log("addBoard", action.payload);
       state.list.push(action.payload);
     },
     deleteBoard(state, action) {
       const newState = state.list.filter((l, idx) => {
-        console.log("asd", action.payload, idx, l);
+        // console.log("asd", action.payload, idx, l);
         return parseInt(action.payload) !== idx;
       });
       state.list = newState;
+    },
+    modifyBoard(state, action) {
+      const newState = [...state.list, action.payload];
+      console.log("dfxz", action.payload);
+      state.list = newState;
+      // state.list = newState;
     },
   },
 });
 
 export const boardActions = boardSlice.actions;
-export const { loadBoard, addBoard, deleteBoard } = boardSlice.actions;
+export const { loadBoard, addBoard, deleteBoard, modifyBoard } =
+  boardSlice.actions;
 export default boardSlice.reducer;

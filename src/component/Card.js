@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteBoardFB } from "../shared/FB/Board";
 const Card = () => {
@@ -22,7 +22,11 @@ const Card = () => {
         >
           삭제버튼
         </button>
+        <Link id={_id} to={`/update/${_id}`}>
+          Update
+        </Link>
       </li>
+      <li>{board.list[_id]?.content}</li>
       <li>{board.list[_id]?.comment}</li>
     </ul>
   );

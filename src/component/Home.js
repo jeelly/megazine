@@ -16,33 +16,41 @@ import ListPage from "./ListPage";
 
 const Home = () => {
   return (
-    <>
+    <HomeWrap>
       <ListPage />
       <Link to="write">
-        <WriteBtn>Write</WriteBtn>
+        <WriteBtn>+</WriteBtn>
       </Link>
-    </>
+    </HomeWrap>
   );
 };
 
 export default Home;
 
+const HomeWrap = styled.div`
+  background-color: #666666;
+  height: 100vh;
+`;
+
 const WriteBtn = styled.button`
-  width: 200px;
+  width: 50px;
   height: 50px;
+  border-radius: 50%;
+  font-size: 30px;
   color: white;
   padding: 10px 0;
   text-align: center;
   /* font-weight: bold; */
-  font-size: 24px;
-  margin: 0 10px;
-  border-radius: 5px;
   border: none;
-  background-color: #2467dc;
+  background-color: rgba(36, 103, 220, 0.5);
   /* background-color: rgba(0, 0, 0, 0.4); */
   cursor: pointer;
+  position: fixed;
+  bottom: 2vh;
+  right: 2vw;
+  z-index: 100;
   transition: background-color 0.5s, transform 3s;
   &:hover {
-    background-color: rgba(36, 103, 220, 0.5);
+    background-color: rgba(36, 103, 220, 1);
   }
 `;

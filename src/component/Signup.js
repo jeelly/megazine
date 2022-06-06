@@ -9,13 +9,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { storage } from "../shared/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-const Signup = () => {
+const Signup = (props) => {
   //ref
   const id_ref = React.useRef(null);
   const name_ref = React.useRef(null);
   const pw_ref = React.useRef(null);
   const pw2_ref = React.useRef(null);
-  const file_link_ref = React.useRef(null); //
+  const file_link_ref = React.useRef(null);
 
   //사진 업로드
   const upLoadFB = async (e) => {
