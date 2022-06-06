@@ -29,7 +29,6 @@ function List(props) {
       </Link>
     );
   });
-
   return (
     <>
       <ul>{board_list}</ul>
@@ -43,7 +42,10 @@ const Comment = (props) => {
 
 const ListPage = () => {
   const board = useSelector((state) => state.board);
-  const dispatch = useDispatch();
+
+  // LOAD
+  // React.useEffect(() => {}, []);
+
   return (
     <>
       <List board={board} />

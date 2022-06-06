@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { auth } from "../shared/firebase";
 import { signOut } from "firebase/auth";
 const Header = (props) => {
+  const is_login = props.is_login;
   return (
     <>
-      {props ? (
+      {is_login ? (
         <header>
           <Link to="/">홈버튼</Link>
           <strong>유저이름</strong>

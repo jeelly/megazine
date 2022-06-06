@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { addBoard } from "../redux/modules/boardSlice";
+import { addBoardFB } from "../shared/FB/Board";
 
 //firebase
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -13,7 +14,6 @@ const Write = () => {
   let navigate = useNavigate();
   const text = React.useRef(null);
   const dispatch = useDispatch();
-
   const file_link_ref = React.useRef(null); //
 
   //사진 업로드
@@ -57,22 +57,22 @@ const Write = () => {
     // 반환할 object
     const contents_obj = {
       content: content,
-      image: file_link_ref.current?.url,
+      image: file_link_ref.current?.url || null,
       today: today,
     };
     return contents_obj;
   };
 
   //데이터를 리덕스에 옮김
-  const addDictionary = () => {
+  const addBoardData = () => {
     const contents_obj = getInputData();
     if (!contents_obj) return;
     const new_contents_obj = {
       ...contents_obj,
     };
-    console.log(new_contents_obj);
-    dispatch(addBoard({ ...new_contents_obj }));
-    console.log(board);
+    // console.log(new_contents_obj);
+    dispatch(addBoardFB({ ...new_contents_obj }));
+    // console.log(board);
     // window.location.href = "/"; // 페이지 이동
   };
   const board = useSelector((state) => state.board);
@@ -106,7 +106,7 @@ const Write = () => {
           <p>게시물 내용</p>
           <textarea rows="10" cols="80" name="content" ref={text}></textarea>
         </div>
-        <input type="button" onClick={addDictionary} value="게시글 작성" />
+        <input type="button" onClick={addBoardData} value="게시글 작성" />
       </form>
     </>
   );
