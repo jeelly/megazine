@@ -9,6 +9,7 @@ import { addtemp } from "../redux/modules/tempSlice";
 const Header = (props) => {
   const is_login = props.is_login;
   const users = useSelector((state) => state.user);
+
   const user_id = users.list.filter((l, idx) => {
     return l.user_id === auth.currentUser?.email;
   });
@@ -16,8 +17,9 @@ const Header = (props) => {
   //리덕스에 filter값 넣으려다 실패.
   // const dispatch = useDispatch();
   // React.useEffect(() => {
-  //   dispatch(addtemp(user_id));
+  // dispatch(addtemp(user_id));
   // }, []);
+
   // const temp = useSelector((state) => state.temp);
   // console.log("temp", temp);
 

@@ -26,6 +26,11 @@ const Write = () => {
   const file_link_ref = React.useRef(null); //
   const [imageSrc, setImageSrc] = React.useState("");
   const [img, setImg] = React.useState("");
+
+  //Radio 값 받아오기
+  const [LayoutStyle, setLayoutStyle] = useState();
+
+  //시간 받아오기
   const todayString = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -36,13 +41,16 @@ const Write = () => {
 
     return year + "-" + month + "-" + day + "-" + hours + ":" + minutes;
   };
-  console.log("어스", auth);
+
+  // console.log("어스", auth);
+
   const getInputData = () => {
     const content = text.current.value;
     const today = todayString(); // 입력한 날짜
     // const image = file_link_ref.current?.url || null;
     const image = file_link_ref.current?.url;
-    console.log("이미지", image);
+    const layoutStyles = LayoutStyle;
+    console.log(image);
     if (!content) {
       alert("아직 입력하지 않은 항목이 있습니다.");
       return false;
@@ -53,6 +61,7 @@ const Write = () => {
       today: today,
       uid: uid,
       image: image,
+      layouts: layoutStyles,
       name: user_id[0]?.name,
     };
     return contents_obj;
@@ -91,11 +100,6 @@ const Write = () => {
     file_link_ref.current = { url: file_url };
   };
 
-  const LayoutImg = [
-    { name: "RIGHT", hex: "RIGHT" },
-    { name: "LEFT", hex: "LEFT" },
-    { name: "BOTTOM", hex: "BOTTOM" },
-  ];
   return (
     <>
       <FormWrap>
@@ -112,27 +116,42 @@ const Write = () => {
         <LeftLabelWrap>
           <RadioWrap>
             왼쪽에 배치
-            <input type="radio" name="layout" value="left" />
+            <input
+              type="radio"
+              name="layout"
+              value="left"
+              onChange={(e) => setLayoutStyle(e.target.value)}
+            />
           </RadioWrap>
           {imageSrc && <Img src={imageSrc} alt="preview-img" />}
         </LeftLabelWrap>
         <RightLabelWrap>
           <RadioWrap>
             오른쪽에 이미지 왼쪽에 텍스트
-            <input type="radio" name="layout" value="right" />
+            <input
+              type="radio"
+              name="layout"
+              value="right"
+              onChange={(e) => setLayoutStyle(e.target.value)}
+            />
           </RadioWrap>
           {imageSrc && <Img src={imageSrc} alt="preview-img" />}
         </RightLabelWrap>
         <BottomLabelWrap>
-          <RadioWrap>
-            하단에 이미지 상단에 텍스트
-            <input type="radio" name="layout" value="bottom" />
-          </RadioWrap>
           {imageSrc && <Img src={imageSrc} alt="preview-img" />}
+          <RadioBottomWrap>
+            상단에 이미지 하단에 텍스트
+            <input
+              type="radio"
+              name="layout"
+              value="bottom"
+              onChange={(e) => setLayoutStyle(e.target.value)}
+            />
+          </RadioBottomWrap>
         </BottomLabelWrap>
         <div>
           <p>게시물 내용</p>
-          <textarea rows="10" cols="110" name="content" ref={text}></textarea>
+          <textarea rows="10" cols="40" name="content" ref={text}></textarea>
         </div>
         <input
           type="button"
@@ -155,31 +174,39 @@ const FormWrap = styled.form`
   align-items: center;
 `;
 const LeftLabelWrap = styled.label`
+  border: 1px solid black;
   display: flex;
   flex-direction: row-reverse;
-  width: 600px;
   justify-content: space-between;
 `;
 const RightLabelWrap = styled.label`
+  border: 1px solid black;
   display: flex;
-  width: 600px;
   justify-content: space-between;
 `;
 const BottomLabelWrap = styled.label`
+  border: 1px solid black;
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 600px;
 `;
 
-const RadioWrap = styled.div`
+const RadioBottomWrap = styled.div`
   width: 300px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 `;
-
+const RadioWrap = styled.div`
+  width: 300px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
 const Img = styled.img`
   width: 300px;
 `;

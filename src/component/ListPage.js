@@ -14,7 +14,7 @@ import styled from "styled-components";
 import Card from "./Card";
 
 function List(props) {
-  console.log("ASDasd", props);
+  // console.log("ASDasd", props);
   const uId = auth.currentUser?.uid;
   const dispatch = useDispatch();
   const [is_login, setIsLogin] = React.useState(false);
@@ -30,18 +30,14 @@ function List(props) {
       <StyledList key={idx}>
         <Link key={idx} id={idx} to={`/card/${parseInt(idx)}`}>
           {/* <Link key={idx} id={idx} to={`/card/l.id}`}> */}
-          <div>
-            <p>{l.today}</p>
+          <Today>{l.today}</Today>
+          <UserName>{l.name}</UserName>
+          <MainContents layoutstyle={l.layouts}>
             <ImgStyle src={l.image} />
-            <p>{l.name}</p>
-            <p>{l.content}</p>
-          </div>
-          <CommentWrap>
-            <p>좋아요 ?개</p>
-            <p>댓글 ?개</p>
-          </CommentWrap>
+            <MainWrite>{l.content}</MainWrite>
+          </MainContents>
         </Link>
-        <button>하트버튼</button>
+        <HeartButton>🤍</HeartButton>
         {l.uid === uId ? (
           <div>
             <Link id={idx} to={`/update/${idx}`}>
@@ -49,6 +45,10 @@ function List(props) {
             </Link>
           </div>
         ) : null}
+        <CommentWrap>
+          <p>좋아요 ?개</p>
+          <p>댓글 ?개</p>
+        </CommentWrap>
       </StyledList>
     );
   });
@@ -74,23 +74,60 @@ const ListPage = () => {
 
 export default ListPage;
 
+const StyledList = styled.li`
+  border: 1px solid white;
+  width: 50%;
+  margin: 0 auto;
+  /* height: 200px; */
+  /* background-color: gray; */
+  padding: 20px;
+`;
+
+const Today = styled.p`
+  text-align: right;
+`;
+const UserName = styled.p`
+  text-align: right;
+`;
 const ListWrap = styled.ul`
   /* width: 100vw; */
   /* height: 5vh; */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column-reverse;
+  /* align-items: center; */
+  /* justify-content: center; */
 `;
-const StyledList = styled.li`
-  border: 1px solid white;
-  background-color: gray;
-  padding: 20px;
+const MainContents = styled.div`
+  display: flex;
+  /* flex-direction: row-reverse; */
+  /* flex-direction: ; // 이걸 바꿔야함 */
+  flex-direction: ${(props) =>
+    props.layoutstyle === "right"
+      ? "row-reverse"
+      : props.layoutstyle === "left"
+      ? "row"
+      : "column"};
+  align-items: center;
+  justify-content: space-between;
+`;
+const MainWrite = styled.p`
+  display: flex;
+  width: 50%;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
 `;
 const ImgStyle = styled.img`
-  width: 500px;
+  width: 50%;
 `;
 const CommentWrap = styled.div`
   display: flex;
   margin: 10px 0;
+`;
+
+const HeartButton = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  float: right;
 `;

@@ -22,7 +22,7 @@ export default Home;
 
 const HomeWrap = styled.div`
   background-color: #666666;
-  height: 100vh;
+  /* height: 100vh; */
 `;
 
 const WriteBtn = styled.button`

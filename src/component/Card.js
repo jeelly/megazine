@@ -37,14 +37,19 @@ const Card = () => {
           </CommentWrap>
         </>
         {card_uid === uId ? (
-          <button
-            onClick={() => {
-              dispatch(deleteBoardFB(id));
-              navigate(-1);
-            }}
-          >
-            삭제버튼
-          </button>
+          <>
+            <Link id={_id} to={`/update/${_id}`}>
+              Update
+            </Link>
+            <button
+              onClick={() => {
+                dispatch(deleteBoardFB(id));
+                navigate(-1);
+              }}
+            >
+              삭제버튼
+            </button>
+          </>
         ) : null}
       </StyledList>
       <Comment _id={_id}></Comment>
@@ -55,20 +60,20 @@ const Card = () => {
 export default Card;
 
 const CardWrap = styled.ul`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 `;
 const StyledList = styled.li`
-  border: 1px solid white;
+  /* border: 1px solid white;
   background-color: gray;
-  padding: 20px;
+  padding: 20px; */
 `;
 const CommentWrap = styled.div`
-  display: flex;
-  margin: 10px 0;
+  /* display: flex;
+  margin: 10px 0; */
 `;
 const ImgStyle = styled.img`
-  width: 700px;
+  /* width: 700px; */
 `;
