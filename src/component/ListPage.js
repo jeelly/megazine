@@ -29,6 +29,7 @@ function List(props) {
     return (
       <StyledList key={idx}>
         <Link key={idx} id={idx} to={`/card/${parseInt(idx)}`}>
+          {/* <Link key={idx} id={idx} to={`/card/l.id}`}> */}
           <div>
             <p>{l.today}</p>
             <ImgStyle src={l.image} />
@@ -43,13 +44,6 @@ function List(props) {
         <button>하트버튼</button>
         {l.uid === uId ? (
           <div>
-            <button
-              onClick={() => {
-                dispatch(deleteBoardFB(l.id));
-              }}
-            >
-              삭제버튼
-            </button>
             <Link id={idx} to={`/update/${idx}`}>
               Update
             </Link>

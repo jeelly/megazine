@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addBoard } from "../redux/modules/boardSlice";
 import { addBoardFB } from "../shared/FB/Board";
-
+//style
+import styled from "styled-components";
 //firebase
 import { auth } from "../shared/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -90,9 +91,14 @@ const FileLeader = () => {
     file_link_ref.current = { url: file_url };
   };
 
+  const LayoutImg = [
+    { name: "RIGHT", hex: "RIGHT" },
+    { name: "LEFT", hex: "LEFT" },
+    { name: "BOTTOM", hex: "BOTTOM" },
+  ];
   return (
     <>
-      <form>
+      <FormWrap>
         <h3>게시글 작성</h3>
         이미지 :{" "}
         <input
@@ -103,30 +109,30 @@ const FileLeader = () => {
           }}
         />
         <p>레이아웃 고르기</p>
-        <p>
-          <label>
+        <LeftLabelWrap>
+          <RadioWrap>
             왼쪽에 배치
             <input type="radio" name="layout" value="left" />
-          </label>
-          {imageSrc && <img src={imageSrc} alt="preview-img" />}
-        </p>
-        <p>
-          <label>
+          </RadioWrap>
+          {imageSrc && <Img src={imageSrc} alt="preview-img" />}
+        </LeftLabelWrap>
+        <RightLabelWrap>
+          <RadioWrap>
             오른쪽에 이미지 왼쪽에 텍스트
             <input type="radio" name="layout" value="right" />
-          </label>
-          {imageSrc && <img src={imageSrc} alt="preview-img" />}
-        </p>
-        <p>
-          <label>
+          </RadioWrap>
+          {imageSrc && <Img src={imageSrc} alt="preview-img" />}
+        </RightLabelWrap>
+        <BottomLabelWrap>
+          <RadioWrap>
             하단에 이미지 상단에 텍스트
             <input type="radio" name="layout" value="bottom" />
-          </label>
-          {imageSrc && <img src={imageSrc} alt="preview-img" />}
-        </p>
+          </RadioWrap>
+          {imageSrc && <Img src={imageSrc} alt="preview-img" />}
+        </BottomLabelWrap>
         <div>
           <p>게시물 내용</p>
-          <textarea rows="10" cols="80" name="content" ref={text}></textarea>
+          <textarea rows="10" cols="110" name="content" ref={text}></textarea>
         </div>
         <input
           type="button"
@@ -137,9 +143,43 @@ const FileLeader = () => {
           }}
           value="게시글 작성"
         />
-      </form>
+      </FormWrap>
     </>
   );
 };
-
 export default FileLeader;
+
+const FormWrap = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const LeftLabelWrap = styled.label`
+  display: flex;
+  flex-direction: row-reverse;
+  width: 600px;
+  justify-content: space-between;
+`;
+const RightLabelWrap = styled.label`
+  display: flex;
+  width: 600px;
+  justify-content: space-between;
+`;
+const BottomLabelWrap = styled.label`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 600px;
+`;
+
+const RadioWrap = styled.div`
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const Img = styled.img`
+  width: 300px;
+`;

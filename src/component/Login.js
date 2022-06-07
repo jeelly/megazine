@@ -19,7 +19,6 @@ const Login = () => {
       id_ref.current.value,
       pw_ref.current.value
     );
-    console.log("asd", user.user.email);
 
     const user_docs = await getDocs(
       //query 어떤 db의 어떤 컬렉션의 where 어떤 조건

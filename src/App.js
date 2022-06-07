@@ -19,12 +19,14 @@ import Home from "./component/Home";
 import Card from "./component/Card";
 import Header from "./component/Header";
 import Update from "./component/Update";
+import Comment from "./component/Comment";
 import NotFound from "./component/NotFound";
 
 import FileLeader from "./component/FileLeader";
 
 import { useSelector, useDispatch } from "react-redux";
 import { loadBoardFB } from "./shared/FB/Board";
+import { loadCommentFB } from "./shared/FB/Comment";
 import { loadUserFB } from "./shared/FB/user";
 function App() {
   const dispatch = useDispatch();
@@ -39,10 +41,9 @@ function App() {
   React.useEffect(() => {
     onAuthStateChanged(auth, loginCheck);
     dispatch(loadBoardFB());
+    dispatch(loadCommentFB());
     dispatch(loadUserFB());
   }, []);
-  console.log(auth.currentUser?.uid);
-  console.log(auth.currentUser);
   return (
     <div className="App">
       <Header is_login={is_login} />
@@ -54,6 +55,7 @@ function App() {
             <Route path="/write" element={<Write auth={auth} />} />
             <Route path="/card/:_id" element={<Card />} />
             <Route path="/update/:_id" element={<Update />} />
+            <Route path="/comment" element={<Comment />} />
             {/* 연습용  */}
             <Route path="/fileleader" element={<FileLeader />} />
           </>
