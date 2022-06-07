@@ -21,12 +21,14 @@ import Header from "./component/Header";
 import Update from "./component/Update";
 import NotFound from "./component/NotFound";
 
+import FileLeader from "./component/FileLeader";
+
 import { useSelector, useDispatch } from "react-redux";
 import { loadBoardFB } from "./shared/FB/Board";
 import { loadUserFB } from "./shared/FB/user";
 function App() {
-  const [is_login, setIsLogin] = React.useState(false);
   const dispatch = useDispatch();
+  const [is_login, setIsLogin] = React.useState(false);
   const loginCheck = async (users) => {
     if (users) {
       setIsLogin(true);
@@ -52,6 +54,8 @@ function App() {
             <Route path="/write" element={<Write auth={auth} />} />
             <Route path="/card/:_id" element={<Card />} />
             <Route path="/update/:_id" element={<Update />} />
+            {/* 연습용  */}
+            <Route path="/fileleader" element={<FileLeader />} />
           </>
         ) : (
           <>

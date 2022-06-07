@@ -17,11 +17,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import boardReducer from "./modules/boardSlice";
 import userReducer from "./modules/userSlice";
+import tempReducer from "./modules/tempSlice";
 
 const store = configureStore({
   reducer: {
     board: boardReducer,
     user: userReducer,
+    temp: tempReducer,
   },
 });
 

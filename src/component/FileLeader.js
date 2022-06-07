@@ -12,7 +12,7 @@ import { auth } from "../shared/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../shared/firebase";
 
-const Write = (props) => {
+const FileLeader = () => {
   const users = useSelector((state) => state.user);
   const user_id = users.list.filter((l, idx) => {
     return l.user_id === auth.currentUser?.email;
@@ -142,4 +142,4 @@ const Write = (props) => {
   );
 };
 
-export default Write;
+export default FileLeader;

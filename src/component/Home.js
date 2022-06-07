@@ -1,11 +1,4 @@
 import React from "react";
-// //firebase
-// import { auth, db } from "../shared/firebase";
-// import {
-//   createUserWithEmailAndPassword,
-//   onAuthStateChanged,
-//   signOut,
-// } from "firebase/auth";
 //router
 import { Link } from "react-router-dom";
 //style-components
