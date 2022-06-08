@@ -1,5 +1,9 @@
 import { db } from "../firebase";
-import { loadComment, addComment } from "../../redux/modules/commentSlice";
+import {
+  loadComment,
+  addComment,
+  deleteComment,
+} from "../../redux/modules/commentSlice";
 import {
   collection,
   doc,
@@ -34,3 +38,17 @@ export const addCommentFB = (comment) => {
     dispatch(addComment(comment_data));
   };
 };
+
+// //DELETE
+// export const deleteCommentFB = (board_id, comment) => {
+//   return async function (dispatch, getState) {
+//     const docRef = doc(db, "comment", comment);
+//     await deleteDoc(docRef);
+//     const _comment_list = getState().comment.list;
+//     const comment_index = _comment_list.findIndex((b) => {
+//       return b.content_id === board_id;
+//     });
+//     // console.log(board_index);
+//     dispatch(deleteComment(comment_index));
+//   };
+// };

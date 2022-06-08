@@ -5,40 +5,7 @@ import { act } from "react-dom/test-utils";
 const boardSlice = createSlice({
   name: "board",
   initialState: {
-    list: [
-      // {
-      //   name: "고양이",
-      //   content:
-      //     "고양이고양이고양이고양이고양이고양이고양이고양이고양이고양이고양이고양이고양이고양이",
-      //   image:
-      //     "https://firebasestorage.googleapis.com/v0/b/megazine-95aec.appspot.com/o/images%2F123123.jpg?alt=media&token=688433bb-6226-46c3-a078-92c3bedb0865",
-      //   comment: "1번 댓글입니다.",
-      // },
-      // {
-      //   name: "고냥이",
-      //   content:
-      //     "고냥이고냥이고냥이고냥이고냥이고냥이고냥이고냥이고냥이고냥이고냥이고냥이",
-      //   image:
-      //     "https://firebasestorage.googleapis.com/v0/b/megazine-95aec.appspot.com/o/images%2F123123.jpg?alt=media&token=688433bb-6226-46c3-a078-92c3bedb0865",
-      //   comment: "2번 댓글입니다.",
-      // },
-      // {
-      //   name: "돼냥이",
-      //   content:
-      //     "돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이돼냥이",
-      //   image:
-      //     "https://firebasestorage.googleapis.com/v0/b/megazine-95aec.appspot.com/o/images%2F123123.jpg?alt=media&token=688433bb-6226-46c3-a078-92c3bedb0865",
-      //   comment: "3번 댓글입니다.",
-      // },
-      // {
-      //   name: "멍멍이",
-      //   content:
-      //     "멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이멍멍이",
-      //   image:
-      //     "https://firebasestorage.googleapis.com/v0/b/megazine-95aec.appspot.com/o/images%2F123123.jpg?alt=media&token=688433bb-6226-46c3-a078-92c3bedb0865",
-      //   comment: "4번 댓글입니다.",
-      // },
-    ],
+    list: [],
   },
 
   reducers: {
@@ -63,15 +30,20 @@ const boardSlice = createSlice({
       state.list = newState;
     },
     modifyBoard(state, action) {
-      const newState = [...state.list, action.payload];
-      console.log("dfxz", action.payload);
+      const newState = state.list.filter((l, idx) => {
+        return l.id !== action.payload.id;
+      });
+      const newwState = [...newState, action.payload];
+      state.list = newwState;
+    },
+    addCommentRnk(state, action) {
+      const newState = [...state.list, ...action.payload];
       state.list = newState;
-      // state.list = newState;
     },
   },
 });
 
 export const boardActions = boardSlice.actions;
-export const { loadBoard, addBoard, deleteBoard, modifyBoard } =
+export const { loadBoard, addBoard, deleteBoard, modifyBoard, addCommentRnk } =
   boardSlice.actions;
 export default boardSlice.reducer;

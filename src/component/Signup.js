@@ -8,6 +8,7 @@ import { auth, db } from "../shared/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { storage } from "../shared/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import styled from "styled-components";
 
 const Signup = (props) => {
   //ref
@@ -47,22 +48,57 @@ const Signup = (props) => {
   };
 
   return (
-    <div>
-      아이디 : <input ref={id_ref} /> <br />
-      이름 : <input ref={name_ref} /> <br />
-      비밀번호 : <input ref={pw_ref} type="password" />
-      <br />
-      비밀번호 확인 : <input ref={pw2_ref} type="password" />
-      <br />
-      <button
+    <SignupWrap>
+      <InputWrap ref={id_ref} placeholder="아이디(이메일)을 입력해주세요." />
+      <InputWrap ref={name_ref} placeholder="닉네임을 입력해주세요." />
+      <InputWrap
+        ref={pw_ref}
+        type="password"
+        placeholder="비밀번호를 입력하세요."
+      />
+      <InputWrap
+        ref={pw2_ref}
+        type="password"
+        placeholder="비밀번호를 한번 더 입력하세요."
+      />
+      <SignupBtn
         onClick={() => {
           passwordCheck();
         }}
       >
         회원가입
-      </button>
-    </div>
+      </SignupBtn>
+    </SignupWrap>
   );
 };
 
 export default Signup;
+
+const SignupWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+`;
+const InputWrap = styled.input`
+  width: 300px;
+  height: 50px;
+  border: none;
+  border-bottom: 2px solid #ffe4a0;
+  margin-top: 20px;
+`;
+
+const SignupBtn = styled.button`
+  border: none;
+  background-color: #cbb271;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 18px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: opacity 0.5s, transform 3s;
+  &:hover {
+    opacity: 0.5;
+  }
+`;

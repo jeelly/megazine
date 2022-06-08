@@ -27,22 +27,26 @@ const Header = (props) => {
     <>
       {is_login ? (
         <HeaderWrap>
-          <LoginLink to="/">🏚️</LoginLink>
-          <UserId>{user_id[0]?.name}님 안녕하세요!</UserId>
-          <LoginLink to="#">🔔</LoginLink>
-          <button
-            onClick={() => {
-              signOut(auth);
-            }}
-          >
-            로그아웃
-          </button>
+          <HeaderLeft>
+            <LoginLink to="/">🏚️</LoginLink>
+            <UserId>{user_id[0]?.name}님 안녕하세요!</UserId>
+          </HeaderLeft>
+          <HeaderRight>
+            <Link to="/noti">🔔</Link>
+            <Logout
+              onClick={() => {
+                signOut(auth);
+              }}
+            >
+              Logout
+            </Logout>
+          </HeaderRight>
         </HeaderWrap>
       ) : (
-        <HeaderWrap>
-          <LogoutLink to="signup">회원가입</LogoutLink>
-          <LogoutLink to="/">로그인</LogoutLink>
-        </HeaderWrap>
+        <LoginWrap>
+          <LogoutLink to="signup">Singup</LogoutLink>
+          <LogoutLink to="/">Login</LogoutLink>
+        </LoginWrap>
       )}
     </>
   );
@@ -52,23 +56,42 @@ export default Header;
 
 const HeaderWrap = styled.header`
   height: 5vh;
-  background-color: black;
+  background-color: #ffe4a0;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
 `;
-
+const LoginWrap = styled.header`
+  height: 5vh;
+  background-color: #ffe4a0;
+  display: flex;
+  align-items: center;
+`;
 const LogoutLink = styled(Link)`
-  color: skyblue;
+  color: black;
   font-weight: bold;
-  margin-right: 1vw;
+  margin-left: 1vw;
 `;
 
 const LoginLink = styled(Link)`
   color: skyblue;
   font-weight: bold;
-  margin-right: 1vw;
+  font-size: 30px;
+  margin-left: 1vw;
 `;
 const UserId = styled.strong`
-  color: white;
+  margin-left: 1vw;
+`;
+const Logout = styled.button`
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: transparent;
+  margin: 0 1vw;
+  cursor: pointer;
+`;
+
+const HeaderLeft = styled.div``;
+const HeaderRight = styled.div`
+  font-size: 20px;
 `;

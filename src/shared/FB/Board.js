@@ -4,6 +4,7 @@ import {
   addBoard,
   deleteBoard,
   modifyBoard,
+  addCommentRnk,
 } from "../../redux/modules/boardSlice";
 import {
   collection,
@@ -61,8 +62,18 @@ export const deleteBoardFB = (board_id) => {
 export const modifyBoardFB = (board, board_id) => {
   return async function (dispatch) {
     console.log("dasd", board);
+
     const docRef = doc(db, "board", board_id);
     await updateDoc(docRef, board);
     dispatch(modifyBoard(board));
+  };
+};
+
+//CommentLength
+export const addCommentRnkFB = (CmtLength, Rnk_id) => {
+  return async function (dispatch) {
+    const docRef = doc(db, "board", Rnk_id);
+    await updateDoc(docRef, CmtLength);
+    dispatch(addCommentRnk(CmtLength));
   };
 };

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { getDocs, addDoc, where, query, collection } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Login = () => {
   //라우트
@@ -32,14 +33,44 @@ const Login = () => {
   };
 
   return (
-    <div>
-      아이디(이메일):
-      <input ref={id_ref} /> <br />
-      비밀번호:
-      <input ref={pw_ref} type="password" /> <br />
-      <button onClick={loginFB}>로그인</button>
-    </div>
+    <LoginWrap>
+      {/* <p>아이디(이메일)</p> */}
+      <InputWrap ref={id_ref} placeholder="아이디를 입력하세요." />
+      {/* <p>비밀번호</p> */}
+      <InputWrap
+        ref={pw_ref}
+        type="password"
+        placeholder="비밀번호를 입력하세요."
+      />
+      <LoginBtn onClick={loginFB}>로그인</LoginBtn>
+    </LoginWrap>
   );
 };
 
 export default Login;
+const LoginWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+`;
+const InputWrap = styled.input`
+  width: 300px;
+  height: 50px;
+  border: none;
+  border-bottom: 2px solid #ffe4a0;
+  margin-top: 20px;
+`;
+const LoginBtn = styled.button`
+  border: none;
+  background-color: #cbb271;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 18px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: opacity 0.5s, transform 3s;
+  &:hover {
+    opacity: 0.5;
+  }
+`;

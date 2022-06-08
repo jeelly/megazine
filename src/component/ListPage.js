@@ -18,6 +18,7 @@ function List(props) {
   const uId = auth.currentUser?.uid;
   const dispatch = useDispatch();
   const [is_login, setIsLogin] = React.useState(false);
+  const [like, setLike] = React.useState("🤍");
   const board_list = props.board.list.map((l, idx) => {
     // const loginCheck = async (users) => {
     //   if (l.uid === uId) {
@@ -26,6 +27,11 @@ function List(props) {
     //     setIsLogin(false);
     //   }
     // };
+    const toggleLike = async function () {
+      setLike("❤️");
+      alert("준비 중 입니다.!");
+    };
+
     return (
       <StyledList key={idx}>
         <Link key={idx} id={idx} to={`/card/${parseInt(idx)}`}>
@@ -37,7 +43,7 @@ function List(props) {
             <MainWrite>{l.content}</MainWrite>
           </MainContents>
         </Link>
-        <HeartButton>🤍</HeartButton>
+        <HeartButton onClick={toggleLike}>{like}</HeartButton>
         {l.uid === uId ? (
           <div>
             <Link id={idx} to={`/update/${idx}`}>
@@ -46,8 +52,8 @@ function List(props) {
           </div>
         ) : null}
         <CommentWrap>
-          <p>좋아요 ?개</p>
-          <p>댓글 ?개</p>
+          <p>좋아요 {l.LikeLength}개</p>
+          <p>댓글 {l.commentLength}개</p>
         </CommentWrap>
       </StyledList>
     );
@@ -75,11 +81,10 @@ const ListPage = () => {
 export default ListPage;
 
 const StyledList = styled.li`
-  border: 1px solid white;
+  border: 1px solid #ffe4a0;
+  border-bottom: none;
   width: 50%;
   margin: 0 auto;
-  /* height: 200px; */
-  /* background-color: gray; */
   padding: 20px;
 `;
 
@@ -94,6 +99,7 @@ const ListWrap = styled.ul`
   /* height: 5vh; */
   display: flex;
   flex-direction: column-reverse;
+  /* background-color: #ffffd2; */
   /* align-items: center; */
   /* justify-content: center; */
 `;
@@ -130,4 +136,5 @@ const HeartButton = styled.button`
   border: none;
   font-size: 30px;
   float: right;
+  cursor: pointer;
 `;

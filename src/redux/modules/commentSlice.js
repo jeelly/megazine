@@ -15,9 +15,15 @@ const commentSlice = createSlice({
       // console.log("addBoard", action.payload);
       state.list.push(action.payload);
     },
+    // deleteComment(state, action) {
+    //   const newState = state.list.filter((l, idx) => {
+    //     return parseInt(action.payload) !== idx;
+    //   });
+    //   state.list = newState;
+    // },
   },
 });
 
 export const commentActions = commentSlice.actions;
-export const { loadComment, addComment } = commentSlice.actions;
+export const { loadComment, addComment, deleteComment } = commentSlice.actions;
 export default commentSlice.reducer;

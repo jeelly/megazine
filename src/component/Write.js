@@ -42,17 +42,20 @@ const Write = () => {
     return year + "-" + month + "-" + day + "-" + hours + ":" + minutes;
   };
 
-  // console.log("어스", auth);
-
   const getInputData = () => {
     const content = text.current.value;
     const today = todayString(); // 입력한 날짜
-    // const image = file_link_ref.current?.url || null;
     const image = file_link_ref.current?.url;
     const layoutStyles = LayoutStyle;
     console.log(image);
     if (!content) {
-      alert("아직 입력하지 않은 항목이 있습니다.");
+      alert("글 내용을 입력해주세요.");
+      return false;
+    } else if (!image) {
+      alert("사진을 첨부해 주세요!");
+      return false;
+    } else if (!layoutStyles) {
+      alert("레이아웃을 선택해 주세요");
       return false;
     }
     // 반환할 object
@@ -63,6 +66,8 @@ const Write = () => {
       image: image,
       layouts: layoutStyles,
       name: user_id[0]?.name,
+      commentLength: 0,
+      LikeLength: 0,
     };
     return contents_obj;
   };
@@ -90,11 +95,11 @@ const Write = () => {
   };
 
   const upLoadFB = async (e) => {
-    // const a = img;
     const uploded_file = await uploadBytes(
       ref(storage, `images/${img.name}`), //경로
       img //어떤파일 올릴지
     );
+
     const file_url = await getDownloadURL(uploded_file.ref);
     //링크를 담는다.
     file_link_ref.current = { url: file_url };
@@ -103,7 +108,7 @@ const Write = () => {
   return (
     <>
       <FormWrap>
-        <h3>게시글 작성</h3>
+        <Title>게시글 작성</Title>
         이미지 :{" "}
         <input
           type="file"
@@ -112,10 +117,10 @@ const Write = () => {
             setImg(e.target.files[0]);
           }}
         />
-        <p>레이아웃 고르기</p>
+        <SubTitle>레이아웃 고르기</SubTitle>
         <LeftLabelWrap>
           <RadioWrap>
-            왼쪽에 배치
+            왼쪽에 이미지 오른쪽에 텍스트
             <input
               type="radio"
               name="layout"
@@ -150,15 +155,18 @@ const Write = () => {
           </RadioBottomWrap>
         </BottomLabelWrap>
         <div>
-          <p>게시물 내용</p>
-          <textarea rows="10" cols="40" name="content" ref={text}></textarea>
+          <SubTitle>게시물 내용</SubTitle>
+          <Textinput rows="10" cols="40" name="content" ref={text}></Textinput>
         </div>
-        <input
+        <WriteBtn
           type="button"
           onClick={() => {
             upLoadFB();
-            addBoardData();
-            // navigate(-1);
+
+            setTimeout(function () {
+              addBoardData();
+              navigate(-1);
+            }, 1500);
           }}
           value="게시글 작성"
         />
@@ -168,24 +176,36 @@ const Write = () => {
 };
 export default Write;
 
+const Title = styled.h3`
+  margin-top: 30px;
+`;
+
+const SubTitle = styled.h3`
+  text-align: center;
+  margin: 20px 0;
+`;
+
+const Textinput = styled.textarea`
+  border: 1px solid #ffe4a0;
+`;
 const FormWrap = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 const LeftLabelWrap = styled.label`
-  border: 1px solid black;
+  border: 1px solid #ffe4a0;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
 `;
 const RightLabelWrap = styled.label`
-  border: 1px solid black;
+  border: 1px solid #ffe4a0;
   display: flex;
   justify-content: space-between;
 `;
 const BottomLabelWrap = styled.label`
-  border: 1px solid black;
+  border: 1px solid #ffe4a0;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -209,4 +229,18 @@ const RadioWrap = styled.div`
 `;
 const Img = styled.img`
   width: 300px;
+`;
+const WriteBtn = styled.input`
+  width: 100px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffe4a0;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.5s, transform 3s;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
