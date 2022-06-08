@@ -162,7 +162,6 @@ const Write = () => {
           type="button"
           onClick={() => {
             upLoadFB();
-
             setTimeout(function () {
               addBoardData();
               navigate(-1);

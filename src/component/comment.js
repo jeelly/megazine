@@ -43,7 +43,7 @@ const Comment = (props) => {
   });
 
   console.log(comment_list.length);
-
+  //z
   const addCommentLength = () => {
     const new_contents_obj = {
       commentLength: comment_list.length + 1,

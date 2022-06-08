@@ -82,7 +82,6 @@ const Update = () => {
 
   //사진 스토리지에 올림
   const upLoadFB = async (e) => {
-    // const a = img;
     const uploded_file = await uploadBytes(
       ref(storage, `images/${img.name}`), //경로
       img //어떤파일 올릴지
