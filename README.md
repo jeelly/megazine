@@ -3,6 +3,7 @@
 > Megazine Api 설계
 <pre>
 회원가입 	POST	/signup
+로그인 	POST	/login
 게시글 목록 조회	GET	/board
 게시글 올리기	POST	/board:id
 게시글 수정	PUT	/board:id
